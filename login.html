@@ -2,63 +2,168 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title>Sign in - CarfaxShara</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Onest:wght@200;400;500;600;700&display=swap" rel="stylesheet">
-
+    <meta charset="UTF-8" />
+    <title>Hello page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
-        :root {
-            --main-bg: #23262F;
-            --primary: #6C63FF;
-            --border-radius: 20px;
-            --input-bg: #272a33;
-            --input-border: #393C48;
-            --input-focus: #6C63FF;
-            --text-main: #fff;
-            --text-muted: #b0b3bc;
-            --shadow: 0 6px 24px rgba(34, 44, 69, 0.10);
-        }
-
-        html,
-        body,
-        * {
-            font-family: "Onest", sans-serif;
-        }
-
         body {
             background: linear-gradient(168.99deg, #22262B 39.74%, #2F343B 100.65%);
-            width: 420px;
             color: white;
+            font-family: "Onest", sans-serif;
+            margin: 0;
+            padding: 25px;
+            min-width: 420px;
             height: 100%;
+            zoom: 0.8;
+        }
+
+        .slider {
+            position: relative;
+            overflow: hidden;
+            height: 480px;
+        }
+
+        .slide {
+            display: none;
+            height: 100%;
+            gap: 30px;
+            flex-direction: column;
+        }
+
+        .slide.active {
+            display: flex;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Точки и тире */
+        .dots {
+            margin-top: 15px;
+
+            text-align: center;
+            user-select: none;
+            display: inline-flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .dot,
+        .dash {
+            display: inline-block;
+            vertical-align: middle;
+            border-radius: 20px;
+            height: 8px;
+        }
+
+        .dot {
+            width: 8px;
+            background: #FFFFFF40;
+        }
+
+        .dash {
+            width: 50px;
+            background: white;
+        }
+
+        .title {
+            font-weight: 500;
+            font-style: Medium;
+            font-size: 45px;
+            line-height: 120%;
+            letter-spacing: 0%;
             margin: 0px;
+        }
+
+        .description {
+            font-weight: 200;
+            font-style: ExtraLight;
+            font-size: 18px;
+            line-height: 140%;
+            letter-spacing: 0%;
+            opacity: 0.6;
         }
     </style>
 </head>
 
 <body>
-    <div style="padding:  25px 25px">
-        <div style="width: 100%; display: flex; align-items: center; justify-content: center;">
-            <img src="images/white_logo.svg" style="height: 55px;" />
+    <div style="width: 100%; display: flex;margin-bottom: 20px; align-items: center; justify-content: space-between;">
+        <img src="images/white_logo.svg" style="height: 55px;" />
+        <div style="padding-right:  16px  ; background-color: #31353b;  border-radius: 90px;">
+            <select id="lang" style="
+                          padding: 13px 0px 13px 16px;
+                          background: #31353b;
+                          color: #fff;
+                           border-radius: 90px;
+                          font-size: 15px;
+                          border: 0px solid #35384a;
+                      ">
+                <option value="en" selected>English</option>
+                <option value="ua">Українська</option>
+                <option value="ru">Русский</option>
+                <option value="es">Español</option>
+                <option value="pl">Polski</option>
+            </select>
         </div>
-        <h1 id="t_main_title" style="font-size: 40px; font-weight: 500; margin: 0px; margin-bottom: 20px;">
-            Easy way to buy your dream car
-        </h1>
-        <div id="t_subtitle" style="font-size: 18px; font-weight: 200; opacity: 0.6; font-style: light;">
-            Get instant access to detailed VIN reports and make smarter decisions before you buy.
-        </div>
-        <div style="margin-top: -20px;">
-            <div style=" height: 100%; width: 100%;">
-                <img src="images/cars/car1.png">
+    </div>
+    <div class="slider" id="slider">
+        <div class="slide active">
+            <h1 class="title" id="slide1_title">🔍 Узнай, кто продает авто</h1>
+            <div class="description" id="slide1_desc">
+                Страховая или дилер - это видно прямо в списке на Copart и IAAI
+            </div>
+            <div style="width: 100%;">
+                <img src="images/cars/car1.png" style="width: 100%;">
             </div>
         </div>
+
+        <div class="slide">
+            <h1 class="title" id="slide2_title">Посмотрите цену, которую хочет продавец
+            </h1>
+            <div class="description" id="slide2_desc">
+                Резервная ставка - в один клик, без догадок
+            </div>
+            <div style="width: 100%;">
+                <img src="images/cars/car2.png" style="width: 100%;">
+            </div>
+        </div>
+
+        <div class="slide">
+            <h1 class="title" id="slide3_title">Смотрите статистику авто</h1>
+            <div class="description" id="slide3_desc">
+                Сколько продалось и за какую сумму.
+            </div>
+            <div style="width: 100%;">
+                <img src="images/cars/car3.png" style="width: 100%;">
+            </div>
+        </div>
+    </div>
+    <div style="display: flex; width: 100%; align-items: center; margin: 20px auto;justify-content: center
+
+">
+        <div class="dots" id="dots">
+            <!-- Здесь будет JS генерировать точки и тире -->
+        </div>
+    </div>
+
+    <div>
         <a id="t_get_started" href="https://carfaxshara.com/" target="_blank"
-            style="font-weight: 400; font-size: 18px;color: white;  margin-top: -50px;    text-decoration: none;
-    ;border-radius: 90px; cursor: pointer; height: 70px; width: 100%;  display: flex; align-items: center; justify-content: center; background-color: #6265EF; ;">
+            style="font-weight: 400; font-size: 18px;color: black;   text-decoration: none; border-radius: 90px; cursor: pointer; height: 70px; width: 100%; display: flex; align-items: center; justify-content: center; background-color: #FFD23F;">
             Get Started
         </a>
     </div>
+
+    <script src="slider.js"></script>
     <script src="login_translations.js"></script>
+
 </body>
 
 </html>

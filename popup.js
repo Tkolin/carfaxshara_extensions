@@ -42,36 +42,8 @@ async function fetchUserProfile() {
     window.location.href = "login.html";
     return;
   }
-  document.getElementById("username").textContent = user?.data?.login;
-  document.getElementById("deposit").textContent = user?.data?.deposit;
-  document.getElementById("avatar").src =
-    user?.data?.avatar || "images/user.svg";
+  // document.getElementById("username").textContent = user?.data?.login;
+  document.getElementById("deposit").textContent = user?.data?.deposit || 0;
+
 })();
 //
-
-const menu = document.getElementById("menu");
-const menuBtn = document.getElementById("menu_btn");
-const logoImg = document.getElementById("logo");
-const body = document.body;
-
-menuBtn.onclick = () => {
-  if (menu.style.display === "flex") {
-    // Скрыть меню
-    menu.style.opacity = "0";
-    setTimeout(() => (menu.style.display = "none"), 260);
-    // Вернуть цвет body и кнопки в дефолт
-    body.style.color = "black"; // белый текст
-    menuBtn.style.background = "#FCFFFE"; // дефолтная кнопка
-    menuBtn.style.color = "black"; // дефолтный цвет иконки
-    logoImg.src = "images/black_logo.svg";
-  } else {
-    // Показать меню
-    menu.style.display = "flex";
-    setTimeout(() => (menu.style.opacity = "1"), 10);
-    // Сменить цвет body и кнопки
-    body.style.color = "#fff";
-    menuBtn.style.background = "#6C63FF"; // выделяем кнопку
-    menuBtn.style.color = "#fff";
-    logoImg.src = "images/white_logo.svg";
-  }
-};

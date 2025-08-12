@@ -17,6 +17,17 @@
     "default_popup": "popup.html",
     "default_icon": "icon.png"
   },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "images/fox.png",
+        "images/mark.png"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ],
   "content_scripts": [
     {
       "matches": [
@@ -24,7 +35,9 @@
         "https://www.copart.com/*"
       ],
       "js": [
-        "content.js"
+        "content_catalog_copart.js",
+        "content_catalog_iaai.js",
+        "content_car.js"
       ],
       "run_at": "document_idle"
     }

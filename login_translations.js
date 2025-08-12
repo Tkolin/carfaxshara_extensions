@@ -1,63 +1,149 @@
 // login_translations.js
 window.loginTranslations = {
   en: {
-    main_title: "Easy way to buy your dream car",
-    subtitle:
-      "Get instant access to detailed VIN reports and make smarter decisions before you buy.",
+    slides: [
+      {
+        title: "Find out who is selling the car",
+        description:
+          "Insurance or dealer – visible directly in the Copart and IAAI list",
+      },
+      {
+        title: "See the price the seller wants",
+        description: "Reserve bid - one click, no guessing",
+      },
+      {
+        title: "Check car statistics",
+        description: "How many sold and at what price.",
+      },
+    ],
     get_started: "Get Started",
   },
   ru: {
-    main_title: "Лёгкий способ купить автомобиль мечты",
-    subtitle:
-      "Получите мгновенный доступ к детальным VIN-отчётам и принимайте более взвешенные решения перед покупкой.",
+    slides: [
+      {
+        title: "🔍 Узнай, кто продает авто",
+        description:
+          "Страховая или дилер - это видно прямо в списке на Copart и IAAI",
+      },
+      {
+        title: "Посмотрите цену, которую хочет продавец",
+        description: "Резервная ставка - в один клик, без догадок",
+      },
+      {
+        title: "Смотрите статистику авто",
+        description: "Сколько продалось и за какую сумму.",
+      },
+    ],
     get_started: "Начать",
   },
   ua: {
-    main_title: "Легкий спосіб купити авто мрії",
-    subtitle:
-      "Миттєвий доступ до детальних VIN-звітів — приймайте рішення впевнено перед покупкою.",
+    slides: [
+      {
+        title: "🔍 Дізнайтеся, хто продає авто",
+        description:
+          "Страхова чи дилер - видно прямо у списку на Copart та IAAI",
+      },
+      {
+        title: "Подивіться ціну, яку хоче продавець",
+        description: "Резервна ставка - в один клік, без здогадок",
+      },
+      {
+        title: "Переглядайте статистику авто",
+        description: "Скільки продано і за яку суму.",
+      },
+    ],
     get_started: "Почати",
   },
   es: {
-    main_title: "La forma fácil de comprar el coche de tus sueños",
-    subtitle:
-      "Obtén acceso instantáneo a informes VIN detallados y toma decisiones más inteligentes antes de comprar.",
+    slides: [
+      {
+        title: "🔍 Descubre quién vende el coche",
+        description:
+          "Seguro o concesionario - visible directamente en la lista de Copart e IAAI",
+      },
+      {
+        title: "Mira el precio que quiere el vendedor",
+        description: "Oferta de reserva - un clic, sin conjeturas",
+      },
+      {
+        title: "Consulta las estadísticas del coche",
+        description: "Cuántos se vendieron y a qué precio.",
+      },
+    ],
     get_started: "Comenzar",
   },
   pl: {
-    main_title: "Łatwy sposób na zakup wymarzonego samochodu",
-    subtitle:
-      "Uzyskaj natychmiastowy dostęp do szczegółowych raportów VIN i podejmuj lepsze decyzje przed zakupem.",
+    slides: [
+      {
+        title: "🔍 Dowiedz się, kto sprzedaje auto",
+        description:
+          "Ubezpieczenie lub dealer – widoczne bezpośrednio na liście Copart i IAAI",
+      },
+      {
+        title: "Zobacz cenę, jaką chce sprzedawca",
+        description: "Rezerwacja - jednym kliknięciem, bez zgadywania",
+      },
+      {
+        title: "Sprawdź statystyki samochodu",
+        description: "Ile sprzedano i po jakiej cenie.",
+      },
+    ],
     get_started: "Zaczynam",
   },
 };
-// translate_login.js
 
-function applyLoginTranslations(lang) {
-  const t =
-    (window.loginTranslations && window.loginTranslations[lang]) ||
-    window.loginTranslations["en"];
+function applySliderTranslations(lang) {
+  const t = window.loginTranslations[lang] || window.loginTranslations["en"];
 
-  if (document.getElementById("t_main_title")) {
-    document.getElementById("t_main_title").textContent = t.main_title;
+  if (t.slides && t.slides.length) {
+    t.slides.forEach((slide, i) => {
+      const titleEl = document.getElementById(`slide${i + 1}_title`);
+      const descEl = document.getElementById(`slide${i + 1}_desc`);
+      if (titleEl) titleEl.textContent = slide.title;
+      if (descEl) descEl.textContent = slide.description;
+    });
   }
-  if (document.getElementById("t_subtitle")) {
-    document.getElementById("t_subtitle").textContent = t.subtitle;
-  }
-  if (document.getElementById("t_get_started")) {
-    document.getElementById("t_get_started").textContent = t.get_started;
-  }
+
+  const btn = document.getElementById("t_get_started");
+  if (btn) btn.textContent = t.get_started;
+
+  // Обновляем названия языков в селекте, чтобы были с флагами
+  const langNames = {
+    en: "English 🇬🇧",
+    ua: "Українська 🇺🇦",
+    ru: "Русский 🇷🇺",
+    es: "Español 🇪🇸",
+    pl: "Polski 🇵🇱",
+  };
+  Object.entries(langNames).forEach(([code, label]) => {
+    const opt = document.querySelector(`option[value="${code}"]`);
+    if (opt) opt.textContent = label;
+  });
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  // ===== Новый блок с автоопределением языка =====
-  const supportedLangs = ["en", "ru", "ua", "es", "pl"];
-  let saved = localStorage.getItem("lang");
-  if (!saved) {
-    const browserLang =
-      (navigator.language || navigator.userLanguage || "en").slice(0, 2).toLowerCase();
-    saved = supportedLangs.includes(browserLang) ? browserLang : "en";
-    localStorage.setItem("lang", saved);
+  const langSelect = document.getElementById("lang");
+  if (!langSelect) return;
+
+  // Восстановим язык из localStorage или дефолт en
+  let savedLang = localStorage.getItem("lang");
+  if (!savedLang) {
+    const browserLang = (navigator.language || navigator.userLanguage || "en")
+      .slice(0, 2)
+      .toLowerCase();
+    savedLang = ["en", "ru", "ua", "es", "pl"].includes(browserLang)
+      ? browserLang
+      : "en";
+    localStorage.setItem("lang", savedLang);
   }
-  applyLoginTranslations(saved);
+
+  langSelect.value = savedLang;
+  applySliderTranslations(savedLang);
+
+  // При смене языка обновляем локализацию и localStorage
+  langSelect.addEventListener("change", () => {
+    const lang = langSelect.value;
+    localStorage.setItem("lang", lang);
+    applySliderTranslations(lang);
+  });
 });

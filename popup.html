@@ -10,11 +10,11 @@
   <style>
     :root {
       --main-bg: #F3F5F7;
-      --primary: #6C63FF;
+      --primary: #FFD23F;
       --border-radius: 20px;
       --input-bg: #272a33;
       --input-border: #393C48;
-      --input-focus: #6C63FF;
+      --input-focus: #FFD23FF;
       --text-main: #23262F;
       --text-muted: #b0b3bc;
       --shadow: 0 6px 24px rgba(34, 44, 69, 0.10);
@@ -27,119 +27,22 @@
     }
 
     body {
-      font-family: "Onest", sans-serif;
-      background-color: var(--main-bg);
-      color: #22262B;
-      width: 420px;
-      min-height: 100%;
-      font-family: Inter, Arial, sans-serif;
-      margin: 0px;
-    }
-
-
-
-    .card {
-      min-height: 40px;
-      background-color: white;
-      border-radius: 12px;
-      padding: 16px;
-      margin-bottom: 10px;
-      color: #23262F;
-      box-shadow: 0 2px 8px rgba(34, 44, 69, 0.07);
-      font-size: 15px;
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-
-    .card-row {
-      display: flex;
-      justify-content: space-between;
-      width: 100%;
-      align-items: center;
-    }
-
-    h4 {
-      margin: 0 0 10px 0;
-      font-size: 1.12em;
-      font-weight: 600;
-      color: #23262F;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 8px;
-    }
-
-    th,
-    td {
-      padding: 6px 10px;
-      border-bottom: 1px solid #f3f3f3;
-      text-align: left;
-    }
-
-    th {
-      color: #888;
-      font-weight: 600;
-    }
-
-    .report-btn {
-      background: var(--primary);
-      color: #fff;
-      border: none;
-      border-radius: 10px;
-      padding: 8px 22px;
-      font-size: 1em;
-      margin-top: 10px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: background .2s;
-      display: inline-block;
-    }
-
-    .report-btn:hover {
-      background: #4b46b1;
-    }
-
-    .report-link {
-      background-color: #6265EF;
+      background: linear-gradient(168.99deg, #22262B 39.74%, #2F343B 100.65%);
       color: white;
-      text-decoration: none;
-      margin-left: 10px;
-      font-size: 13px;
-      padding: 9px 18px;
-      border-radius: 90px;
+      font-family: "Onest", sans-serif;
+      margin: 0;
+      padding: 25px;
+      min-width: 420px;
+      height: 100%;
+      zoom: 0.8;
     }
 
 
 
 
 
-    .car_card {
-      display: grid;
-      grid-template-columns: 3fr 2fr;
-      gap: 24px;
-      margin-bottom: 20px;
-    }
 
-    .car_card_img {
-      width: 100%;
-      max-height: 105px;
-      object-fit: cover;
-      border-radius: 16px;
-    }
 
-    .car_card_info {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .car_card_title {
-      margin-bottom: 7px;
-      font-size: 13px;
-    }
 
 
 
@@ -201,33 +104,20 @@
   </style>
 </head>
 
-<body style="position: relative;">
-  <div style="padding: 27px 25px 150px 25px">
+<body style="position: relative; ">
+  <div style="height: 100%;">
     <!-- Шапка -->
     <div id="main_header">
-      <div style="display: flex; flex-direction: row; justify-content: space-between;  z-index: 2; position: relative;">
+      <div style="display: flex; flex-direction: row; justify-content: start; margin-bottom: 57px; ">
         <div style="display: flex; flex-direction: row; gap: 16px;">
           <div style="width: 100%;">
-            <img src="images/black_logo.svg" id="logo" style="height: 55px;" />
+            <img src="images/white_logo.svg" id="logo" style="height: 55px;" />
           </div>
-          <!-- <div
-            style="display: none; width: 50px; height: 50px; border-radius: 90px; background: #ddd;overflow: hidden;   align-items: center; justify-content: center;">
-            <img id="avatar" style="height: 100%; width: 100%;" />
-          </div>
-          <div style="height: 100%; display: flex; justify-content: center; flex-direction: column;">
-            <span style="color: #898989; font-size: 14px;" id="t_welcome">
-              Welcome 👋
-            </span>
-            <span id="username"></span>
-          </div> -->
-        </div>
-        <div id="menu_btn">
-          ☰
         </div>
       </div>
     </div>
     <!-- Меню -->
-    <div id="menu">
+    <div>
       <div style="display: flex; flex-direction: column; gap: 20px;">
         <div style="font-size: 16px; display: flex; justify-content: space-between; width: 100%; align-items: center;">
           <div style="color:#FFFFFF ; display: flex; align-items: center; gap: 10px">
@@ -240,7 +130,7 @@
             </div>
           </div>
           <div style="background-color: #FFFFFF0D; color:#FFFFFF;  padding: 13px 16px; border-radius: 90px;">
-            <span>$</span><span id="deposit"></span> <span> USD</span>
+            <span>$ </span><span id="deposit"></span> <span> USD</span>
           </div>
         </div>
         <div style="font-size: 16px; display: flex; justify-content: space-between; width: 100%; align-items: center;">
@@ -281,128 +171,26 @@
             </div>
           </div>
           <a target="_blank" href="https://carfaxshara.com/" style="      text-decoration: none;
-background-color: #6265EF; color:#FFFFFF;  padding: 13px 16px; border-radius: 90px;" id="t_openWebsite">
+background-color: #FFD23F; color:black;  padding: 13px 16px; border-radius: 90px;" id="t_openWebsite">
             Open website
           </a>
         </div>
-      </div>
-      <div style="position: absolute;  width: calc(100% - 50px);;top: 500px; text-align: center;  font-size: 16px;">
-        <a href="https://carfaxshara.com/" style="color: white;" id="t_dashboardNote">Account dashboard with balance on
-          the website</a>
-        <div style="height: 15px;"></div>
-        <a href="https://carfaxshara.com/" style="color: white" id="t_stickerNote">Free WindowsSticker available on the
-          website</a>
+        <div style=" text-align: center;  font-size: 16px; margin-top: 30px;">
+          <a href="https://carfaxshara.com/" style="color: white;" id="t_dashboardNote">Account dashboard with balance
+            on
+            the website</a>
+          <div style="height: 15px;"></div>
+          <a href="https://carfaxshara.com/" style="color: white" id="t_stickerNote">Free WindowsSticker available on
+            the
+            website</a>
+        </div>
       </div>
     </div>
     <!-- V1: Карточка -->
-    <div id="car_details" style="display: flex; width: 100%;">
-      <div style="width: 100%;display: flex; flex-direction: column; gap: 15px; margin-top: 20px; ">
-        <div class="block">
-          <h3 class="title" id="t_vehicleOverview">🔍 Vehicle Overview</h3>
-          <div class="card">
-            <div class="card-row">
-              <div id="t_vinCode">
-                VIN Code:
-              </div>
-              <div id="car_vin" class="tag">Loading...</div>
-            </div>
-            <div class="card-row">
-              <div id="t_sellerType">
-                Seller Type:
-              </div>
-              <div id="car_type" class="tag">Loading...</div>
-            </div>
-            <div class="card-row">
-              <div id="t_reservePrice">
-                Reserve Price:
-              </div>
-              <div id="car_price" class="tag">Loading...</div>
-            </div>
-            <div class="card-row">
-              <div id="t_sellerName">
-                Seller Name:
-              </div>
-              <div id="car_seller" class="tag">Loading...</div>
-            </div>
-
-          </div>
-        </div>
-
-        <div class="block">
-          <h3 class="title" id="t_salesStatistic">📊 Sales Statistic</h3>
-          <div class="card">
-            <table id="sales_table">
-              <thead>
-                <tr>
-                  <th id="t_date">Date</th>
-                  <th id="t_price">Price</th>
-                  <th id="t_status">Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                <!-- Данные по продажам будут тут -->
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <div class="card"
-          style="position: absolute; left: 0px; bottom: 0px; width: calc(100% - 25px); margin-bottom: 0px;">
-          <h3 class="title" style="padding: 0px; margin: 0px;" id="t_generateReport">📄 Generate a report</h3>
-          <div style="margin-top:10px;">
-            <div class="card-row" style="margin-bottom: 25px;">
-              <div style="display: flex; align-items: center; gap: 10px">
-                <img src="images/fox.png">
-                <span id="t_carfaxReport">Carfax report:</span>
-              </div>
-              <div>
-                <span id="car_carfar_report_price"></span>
-                <a id="carfax_report_link" class="report-link" target="_blank"><span id="t_buyReport">Buy
-                    Report</span></a>
-              </div>
-            </div>
-            <div class="card-row">
-              <div style="display: flex; align-items: center; gap: 10px">
-                <img src="images/mark.png">
-                <span id="t_autocheckReport">Autocheck report:</span>
-              </div>
-              <div>
-                <span id="car_autocheck_report_price"></span>
-                <a id="autocheck_report_link" class="report-link" target="_blank"><span id="t_buyReport2">Buy
-                    Report</span></a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- V2: Каталог -->
-    <div id="car_list_wrapper" style="display: flex; width: 100%; margin-top: 30px;">
-      <h3 class="title" style="padding: 0px; margin: 0px;" id="t_vehicleListings">🚗 Vehicle Listings</h3>
-      <div style="width: 100%;display: flex; flex-direction: column; gap: 30px; margin-top:20px;">
-        <div class="card">
-          <div class="car_card" style="color: #898989; margin-bottom: 0px;">
-            <div id="t_image">
-              Image
-            </div>
-            <div id="t_lotInfo">
-              Lot information
-            </div>
-          </div>
-          <div style="height: 1px; width: 100%; display: flex; background-color: #898989; opacity: 0.4;"></div>
-          <div id="car_list"></div>
-        </div>
-      </div>
-    </div>
   </div>
-
-
   <script src="translations.js"></script>
   <script src="translate_script.js"></script>
   <script src="popup.js"></script>
-  <script src="popup_car.js"></script>
-  <script src="popup_catalog.js"></script>
 
 </body>
 
