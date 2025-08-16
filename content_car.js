@@ -248,7 +248,7 @@ async function loadCarDataOnPage() {
     !/iaai\.com\/VehicleDetail\/\d+/.test(url) &&
     !/copart\.com\/lot\/\d+/.test(url)
   ) {
-    console.log("Not a car detail page");
+    console.log("TKL Not a car detail page");
     return;
   }
 
@@ -256,9 +256,13 @@ async function loadCarDataOnPage() {
     let car_id = null,
       api = null;
     if (/iaai\.com/.test(url)) {
-      const match = url.match(/VehicleDetail\/(\d+)/);
-      if (match) car_id = match[1];
+      // const match = url.match(/VehicleDetail\/(\d+)/);
+      // if (match) car_id = match[1];
+      const idSpan = document.querySelector("span.data-list__value.text-bold");
+      car_id = idSpan?.textContent.trim();
+
       api = "iaac";
+      console.log("TKL t car_id", car_id);
     }
     if (/copart\.com/.test(url)) {
       const match = url.match(/lot\/(\d+)/);
@@ -270,7 +274,7 @@ async function loadCarDataOnPage() {
 
   const { car_id, api } = getCarIdAndApi(url);
   if (!car_id || !api) {
-    console.error("Car ID or API not found");
+    console.error("TKL Car ID or API not found");
     return;
   }
 
@@ -280,7 +284,7 @@ async function loadCarDataOnPage() {
       await waitForElement("#bid-information-id", 10000);
     } catch (e) {
       console.warn(
-        "Container #bid-information-id not found in time, inserting at body"
+        "TKL Container #bid-information-id not found in time, inserting at body"
       );
     }
   } else if (api === "iaac") {
@@ -288,7 +292,7 @@ async function loadCarDataOnPage() {
       await waitForElement("#vdActionInfo", 10000);
     } catch (e) {
       console.warn(
-        "Container #vdActionInfo not found in time, inserting at body"
+        "TKL Container #vdActionInfo not found in time, inserting at body"
       );
     }
   }
@@ -302,7 +306,7 @@ async function loadCarDataOnPage() {
       }
     );
   }).catch((err) => {
-    console.error("Error fetching car details:", err);
+    console.error("TKL Error fetching car details:", err);
     return null;
   });
 
@@ -310,7 +314,7 @@ async function loadCarDataOnPage() {
     const existingBlock = document.getElementById("car_details");
     if (existingBlock) {
       existingBlock.remove();
-      console.log("Removed car_details block due to error or no data");
+      console.log("TKL Removed car_details block due to error or no data");
     }
     return;
   }
