@@ -20,14 +20,11 @@ async function fetchUserProfile() {
   const form = new FormData();
   form.append("token", token);
 
-  const res = await fetch(
-    "https://carfaxshara.com/bot/site.php?action=getUser",
-    {
-      method: "POST",
-      credentials: "include", // кука token уйдёт автоматически
-      body: form,
-    }
-  );
+  const res = await fetch("https://vinscan.online/account_info/get_me", {
+    method: "POST",
+    credentials: "include", // кука token уйдёт автоматически
+    body: form,
+  });
   if (!res.ok) return null;
   const user = await res.json();
   // Можно проверить, что user.id существует (или другой признак)
@@ -43,7 +40,7 @@ async function fetchUserProfile() {
     return;
   }
   // document.getElementById("username").textContent = user?.data?.login;
-  document.getElementById("deposit").textContent = user?.data?.deposit || 0;
+  document.getElementById("deposit").textContent = user?.Balance || 0;
 
 })();
 //
