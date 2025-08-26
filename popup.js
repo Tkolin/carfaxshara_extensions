@@ -2,7 +2,7 @@ function getTokenFromCookie() {
   return new Promise((resolve) => {
     chrome.cookies.get(
       {
-        url: "https://carfaxshara.com",
+        url: "https://vinscan.online",
         name: "token",
       },
       (cookie) => {
@@ -41,6 +41,5 @@ async function fetchUserProfile() {
   }
   // document.getElementById("username").textContent = user?.data?.login;
   document.getElementById("deposit").textContent = user?.Balance || 0;
-
 })();
 //
