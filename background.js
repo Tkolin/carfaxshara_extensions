@@ -20,7 +20,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     // // Возвращаем мок сразу, без fetch
     // sendResponse({ data: mockData });
     // return true;
-    const url = `https://vinscan.online/api/extension/${request.api}/detailed/`;
+    const url = `https://carfaxshara.com/api/extension/${request.api}/detailed/`;
 
     fetch(url, {
       method: "POST",

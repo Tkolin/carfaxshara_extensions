@@ -24,7 +24,7 @@ function fetchExtraInfoViaBackground(ids) {
     chrome.runtime.sendMessage(
       {
         action: "fetchExtraInfo",
-        url: `https://vinscan.online/api/extension/copart/sellers/types/`,
+        url: `https://carfaxshara.com/api/extension/copart/sellers/types/`,
         ids,
       },
       (response) => {

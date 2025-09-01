@@ -45,6 +45,7 @@
   "host_permissions": [
     "https://vinscan.online/*",
     "https://www.iaai.com/*",
-    "https://www.copart.com/*"
+    "https://www.copart.com/*",
+    "https://carfaxshara.com/*"
   ]
 }
