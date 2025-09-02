@@ -14,16 +14,10 @@ function getTokenFromCookie() {
 }
 
 async function fetchUserProfile() {
-  const token = await getTokenFromCookie();
-  if (!token) return null; // Не авторизован!
-
-  const form = new FormData();
-  form.append("token", token);
-
+ 
   const res = await fetch("https://vinscan.online/account_info/get_me", {
     method: "POST",
-    credentials: "include", // кука token уйдёт автоматически
-    body: form,
+    credentials: "include",
   });
   if (!res.ok) return null;
   const user = await res.json();
