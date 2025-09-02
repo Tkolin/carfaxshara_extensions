@@ -326,3 +326,14 @@ async function loadCarDataOnPage() {
 window.addEventListener("load", () => {
   loadCarDataOnPage();
 });
+
+let lastUrl = location.href;
+
+new MutationObserver(() => {
+  const url = location.href;
+  if (url !== lastUrl) {
+    lastUrl = url;
+    console.log("TKL: URL changed to", url);
+    loadCarDataOnPage();
+  }
+}).observe(document, { subtree: true, childList: true });
