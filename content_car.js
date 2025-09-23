@@ -232,6 +232,18 @@
       }, timeout);
     });
   }
+  async function waitWithRetries(selector, retries = 3, delay = 2000) {
+    for (let i = 0; i < retries; i++) {
+      try {
+        const el = await waitForElement(selector, 5000); // ждём до 5с
+        return el;
+      } catch (e) {
+        console.warn(`TKL: ${selector} not found, retry ${i + 1}/${retries}`);
+        await new Promise((r) => setTimeout(r, delay));
+      }
+    }
+    return null;
+  }
 
   async function loadCarDataOnPage() {
     const url = window.location.href;
@@ -272,16 +284,16 @@
     }
 
     if (api === "copart") {
-      try {
-        await waitForElement("#bid-information-id", 10000);
-      } catch {
-        console.warn("TKL: #bid-information-id not found in time");
+      const el = await waitWithRetries("#bid-information-id", 3, 2000);
+      if (!el) {
+        console.warn("TKL: #bid-information-id not found after retries");
+        return;
       }
     } else if (api === "iaac") {
-      try {
-        await waitForElement("#vdActionInfo", 10000);
-      } catch {
-        console.warn("TKL: #vdActionInfo not found in time");
+      const el = await waitWithRetries("#vdActionInfo", 3, 2000);
+      if (!el) {
+        console.warn("TKL: #vdActionInfo not found after retries");
+        return;
       }
     }
 
