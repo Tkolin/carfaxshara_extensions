@@ -140,7 +140,13 @@
         console.warn("TKL: #vdActionInfo not found, appended to body");
       }
     } else if (api === "copart") {
-      const parentEl = document.querySelector("#bid-information-id");
+      let parentEl = document.querySelector("#bid-information-id");
+      if (!parentEl) {
+        console.warn(
+          "TKL: #bid-information-id not found, search .bid-info-marketing-container"
+        );
+        parentEl = document.querySelector(".bid-info-marketing-container");
+      }
       if (parentEl) {
         if (parentEl.children.length >= 1) {
           parentEl.insertBefore(container, parentEl.children[1]);
@@ -150,11 +156,13 @@
           console.log("TKL: Block appended inside #bid-information-id");
         }
       } else {
-        document.body.appendChild(container);
-        console.warn("TKL: #bid-information-id not found, appended to body");
+        // document.body.appendChild(container);
+        console.warn(
+          "TKL: #bid-information-id and .bid-info-marketing-container not found, appended to body"
+        );
       }
     } else {
-      document.body.appendChild(container);
+      // document.body.appendChild(container);
       console.warn("TKL: API not matched, appended to body");
     }
 
@@ -284,13 +292,11 @@
     }
 
     if (api === "copart") {
-      let el = await waitWithRetries("#bid-information-id", 3, 2000);
+      let el = await waitWithRetries("#bid-information-id", 2, 500);
       if (!el) {
-        console.warn(
-          "TKL: #bid-information-id not found after retries"
-        );
+        console.warn("TKL: #bid-information-id not found after retries");
       }
-      el = await waitWithRetries(".bid-info-marketing-container", 3, 2000);
+      el = await waitWithRetries(".bid-info-marketing-container", 2, 500);
       if (!el) {
         console.warn(
           "TKL: #bid-information-id or bid-info-marketing-container not found after retries"
