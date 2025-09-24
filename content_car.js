@@ -292,16 +292,15 @@
     }
 
     if (api === "copart") {
-      let el = await waitWithRetries("#bid-information-id", 2, 500);
+      let el = await waitWithRetries("#bid-information-id", 4, 500);
       if (!el) {
         console.warn("TKL: #bid-information-id not found after retries");
       }
-      el = await waitWithRetries(".bid-info-marketing-container", 2, 500);
+      el = await waitWithRetries(".bid-info-marketing-container", 4, 500);
       if (!el) {
         console.warn(
           "TKL: #bid-information-id or bid-info-marketing-container not found after retries"
         );
-        return;
       }
     } else if (api === "iaac") {
       const el = await waitWithRetries("#vdActionInfo", 3, 2000);
