@@ -252,6 +252,45 @@
     }
     return null;
   }
+  function waitAny(selectors, timeout = 10000) {
+    return new Promise((resolve, reject) => {
+      let resolved = false;
+      const observers = [];
+
+      function done(el) {
+        if (resolved) return;
+        resolved = true;
+        observers.forEach((o) => o.disconnect());
+        resolve(el);
+      }
+
+      selectors.forEach((selector) => {
+        const el = document.querySelector(selector);
+        if (el) {
+          done(el);
+          return;
+        }
+        const observer = new MutationObserver(() => {
+          const el = document.querySelector(selector);
+          if (el) {
+            console.log("TKL: Found element:", selector);
+            done(el);
+          }
+        });
+        observer.observe(document.body, { childList: true, subtree: true });
+        observers.push(observer);
+      });
+
+      setTimeout(() => {
+        if (!resolved) {
+          observers.forEach((o) => o.disconnect());
+          reject(
+            new Error("Timeout waiting for any of: " + selectors.join(", "))
+          );
+        }
+      }, timeout);
+    });
+  }
 
   async function loadCarDataOnPage() {
     const url = window.location.href;
@@ -292,23 +331,14 @@
     }
 
     if (api === "copart") {
-      const [el1, el2] = await Promise.allSettled([
-        waitWithRetries("#bid-information-id", 4, 1000),
-        waitWithRetries(".bid-info-marketing-container", 4, 1000),
-      ]);
-
-      if (el1.status === "fulfilled" && el1.value) {
-        console.log("TKL: Found #bid-information-id");
-      } else {
-        console.warn("TKL: #bid-information-id not found after retries");
-      }
-
-      if (el2.status === "fulfilled" && el2.value) {
-        console.log("TKL: Found .bid-info-marketing-container");
-      } else {
-        console.warn(
-          "TKL: .bid-info-marketing-container not found after retries"
+      try {
+        const el = await waitAny(
+          ["#bid-information-id", ".bid-info-marketing-container"],
+          10000
         );
+        console.log("TKL: Found element for copart:", el);
+      } catch (e) {
+        console.warn("TKL: Neither selector found:", e);
       }
     } else if (api === "iaac") {
       const el = await waitWithRetries("#vdActionInfo", 3, 2000);
