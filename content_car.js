@@ -292,14 +292,22 @@
     }
 
     if (api === "copart") {
-      let el = await waitWithRetries("#bid-information-id", 4, 500);
-      if (!el) {
+      const [el1, el2] = await Promise.allSettled([
+        waitWithRetries("#bid-information-id", 4, 1000),
+        waitWithRetries(".bid-info-marketing-container", 4, 1000),
+      ]);
+
+      if (el1.status === "fulfilled" && el1.value) {
+        console.log("TKL: Found #bid-information-id");
+      } else {
         console.warn("TKL: #bid-information-id not found after retries");
       }
-      el = await waitWithRetries(".bid-info-marketing-container", 4, 500);
-      if (!el) {
+
+      if (el2.status === "fulfilled" && el2.value) {
+        console.log("TKL: Found .bid-info-marketing-container");
+      } else {
         console.warn(
-          "TKL: #bid-information-id or bid-info-marketing-container not found after retries"
+          "TKL: .bid-info-marketing-container not found after retries"
         );
       }
     } else if (api === "iaac") {
